@@ -2,7 +2,7 @@ from typing import Callable, List, Optional, Tuple
 from board_manager import BoardManager, Position
 
 # --- Type alias for strategy function signature -------------------------------
-StrategyFunc = Callable[[BoardManager, Position], Position]
+StrategyFunc = Callable[[BoardManager, Optional[Position]], Position]
 
 # --- Utility: generic selector -------------------------------------------------
 def _best_by_key(candidates: List[Position], key_fn: Callable[[Position], Tuple], reverse: bool = True) -> Position:
@@ -19,17 +19,18 @@ def _best_by_key(candidates: List[Position], key_fn: Callable[[Position], Tuple]
 	return best_pos  # type: ignore
 
 # --- Strategy 1: Greedy (maximize immediate value) -----------------------------
-def strategy_greedy_maximize(board: BoardManager, last_pos: Position) -> Position:
-	'''
-	Greedy strategy:
-		• Always chooses the allowed cell with the highest immediate value.
-		• Ignores future consequences.
-		• Very fast and simple baseline.
-	'''
-	allowed = board.get_allowed_positions(last_pos)
-	if not allowed:
-		raise ValueError("No allowed moves for strategy")
-	return _best_by_key(allowed, lambda p: (board.get_value(p) or 0,))
+def strategy_greedy_maximize(board: BoardManager, last_pos: Optional[Position]) -> Position:
+    '''
+    Greedy strategy:
+        • Always chooses the allowed cell with the highest immediate value.
+        • Ignores future consequences.
+        • Works for first move (all cells) and later moves (row/column).
+    '''
+    allowed = (board.get_all_available_positions()
+               if last_pos is None else board.get_allowed_positions(last_pos))
+    if not allowed:
+        raise ValueError("No allowed moves for strategy")
+    return _best_by_key(allowed, lambda p: (board.get_value(p) or 0,))
 
 # --- Strategy 2: Maximize Future Minimum (1-step lookahead) --------------------
 def strategy_maximize_future_min(board: BoardManager, last_pos: Position) -> Position:
@@ -40,7 +41,8 @@ def strategy_maximize_future_min(board: BoardManager, last_pos: Position) -> Pos
 		• Chooses the move that maximizes (our_value - opponent_min_value).
 		• Balances immediate gain and defense.
 	'''
-	allowed = board.get_allowed_positions(last_pos)
+	allowed = (board.get_all_available_positions()
+				if last_pos is None else board.get_allowed_positions(last_pos))
 	if not allowed:
 		raise ValueError("No allowed moves for strategy")
 
@@ -65,7 +67,8 @@ def strategy_minimize_opponent_options(board: BoardManager, last_pos: Position) 
 		• Tie-breaker: higher immediate value.
 		• Focuses on board control rather than pure score.
 	'''
-	allowed = board.get_allowed_positions(last_pos)
+	allowed = (board.get_all_available_positions()
+				if last_pos is None else board.get_allowed_positions(last_pos))
 	if not allowed:
 		raise ValueError("No allowed moves for strategy")
 
@@ -90,7 +93,8 @@ def strategy_high_value_preservation(board: BoardManager, last_pos: Position) ->
 		• Prefers moves that avoid exposing the global maximum.
 		• Tie-breaks by immediate value.
 	'''
-	allowed = board.get_allowed_positions(last_pos)
+	allowed = (board.get_all_available_positions()
+				if last_pos is None else board.get_allowed_positions(last_pos))
 	if not allowed:
 		raise ValueError("No allowed moves for strategy")
 	global_max = board.max_remaining_value()
@@ -126,7 +130,7 @@ STRATEGY_REGISTRY: dict[str, StrategyFunc] = {
 
 # --- Strategy lookup ----------------------------------------------------------
 def get_strategy(name: str) -> StrategyFunc:
-	"""Return a strategy function by its name (case-sensitive)."""
+	"""Return a strategy function by its name."""
 	if name not in STRATEGY_REGISTRY:
 		raise ValueError(f"Unknown strategy: {name}")
 	return STRATEGY_REGISTRY[name]

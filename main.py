@@ -552,7 +552,10 @@ def show_config_menu(config: GameConfig,
                 preset_board_raw=preset_board_raw
             )
             return True
-
+        
+        elif choice == "8":
+            # Cancel
+            return False
 
 # --- Main loop ---------------------------------------------------------------
 def main() -> None:

@@ -169,13 +169,9 @@ def start_game(config: GameConfig) -> Optional[dict[str, Any]]:
 
         # --- Computer player ---
         else:
-            if last_pos is None:
-                # For first move, pick highest-value cell (simple greedy)
-                move = max(allowed, key=lambda p: board.get_value(p) or 0)
-            else:
-                if strat is None:
-                    raise RuntimeError("Missing strategy for computer player")
-                move = strat(board, last_pos)
+            if strat is None:
+                raise RuntimeError("Missing strategy for computer player")
+            move = strat(board, last_pos)
 
         # --- Execute move ---
         val_now = board.remove_and_get(move)
