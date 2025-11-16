@@ -33,7 +33,7 @@ def strategy_greedy_maximize(board: BoardManager, last_pos: Optional[Position]) 
     return _best_by_key(allowed, lambda p: (board.get_value(p) or 0,))
 
 # --- Strategy 2: Maximize Future Minimum (1-step lookahead) --------------------
-def strategy_maximize_future_min(board: BoardManager, last_pos: Position) -> Position:
+def strategy_maximize_future_min(board: BoardManager, last_pos: Optional[Position]) -> Position:
 	'''
 	Maximize-Future-Min strategy:
 		• Looks one move ahead.
@@ -60,7 +60,7 @@ def strategy_maximize_future_min(board: BoardManager, last_pos: Position) -> Pos
 	return _best_by_key(allowed, metric)
 
 # --- Strategy 3: Minimize Opponent Options ------------------------------------
-def strategy_minimize_opponent_options(board: BoardManager, last_pos: Position) -> Position:
+def strategy_minimize_opponent_options(board: BoardManager, last_pos: Optional[Position]) -> Position:
 	'''
 	Minimize-Opponent-Options strategy:
 		• Chooses the move that leaves the fewest possible next moves for the opponent.
@@ -85,7 +85,7 @@ def strategy_minimize_opponent_options(board: BoardManager, last_pos: Position) 
 	return _best_by_key(allowed, metric)
 
 # --- Strategy 4: Preserve High Values -----------------------------------------
-def strategy_high_value_preservation(board: BoardManager, last_pos: Position) -> Position:
+def strategy_high_value_preservation(board: BoardManager, last_pos: Optional[Position]) -> Position:
 	'''
 	High-Value-Preservation strategy:
 		• Defensive approach focused on protecting the board's highest-value cells.

@@ -307,7 +307,7 @@ def submenu_strategy_B(config: GameConfig) -> None:
 def board_presets_menu(config: GameConfig,
                        state: dict) -> None:
     """
-    Option 5: Player B Strategy submenu
+    Option 5: Board Presets submenu
     
     Let user choose Random vs Manual board, set/clear seed, set/clear manual board.
     We keep small 'state' dict to persist raw values for saving:
@@ -585,7 +585,7 @@ def main() -> None:
                 # Run a game and get its summary (dict with a_score, b_score, rounds, mode, result)
                 result = start_game(config)
                 
-                    # If user typed 'menu' during the game, skip post-game menu and go straight back.
+                # If user typed 'menu' during the game, skip post-game menu and go straight back.
                 if result is None:
                     continue  #Bback to main loop 
 

@@ -76,7 +76,7 @@ def start_game(config: GameConfig) -> Optional[dict[str, Any]]:
             "b_score": int,
             "rounds": int,
             "mode": str,
-            "result": "A" | "B" | "Tie",
+            "winner": "A" | "B" | "Tie",
           }
         or None if the user typed 'Menu' mid-game.
     """
@@ -87,7 +87,7 @@ def start_game(config: GameConfig) -> Optional[dict[str, Any]]:
         raise ValueError("MODE must be one of H_VS_H, H_VS_C, C_VS_C")
 
     # --- Player controllers (human or strategy func) ---
-    PlayerController = Tuple[str, Optional[Callable[[BoardManager, Position], Position]]]
+    PlayerController = Tuple[str, Optional[Callable[[BoardManager, Optional[Position]], Position]]]
 
     def controller_for(player: str) -> PlayerController:
         """Return ('human', None) or ('computer', strategy_func) based on mode/config."""
