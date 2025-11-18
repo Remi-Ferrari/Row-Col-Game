@@ -230,7 +230,7 @@ Focus on control and constraints. Since the rule severely restricts subsequent m
 - **Balance greed and control** — Sometimes restricting your opponent matters more than grabbing a big number.
 - **Watch for traps** — Avoid leaving high-value numbers accessible in the same row or column.
 - **Seeds are useful** — Set a seed to replay the same board for practice.
-- **Observe AIs** — In C_VS_C mode, watch how different strategies behave and learn from them.
+- **Observe Computer behaviours** — In C_VS_C mode, watch how different strategies behave and learn from them.
 
 ---
 
@@ -270,4 +270,4 @@ Use `SEED` for reproducible random boards instead of manually defining one.
 
 ## 14. Conclusion
 
-You are now ready to play the Row-Column Game! Experiment with different board sizes and computer strategies, challenge yourself, or let AIs battle it out. The game is simple to learn yet deep enough to reward planning and foresight. Have fun strategizing!
+You are now ready to play the Row-Column Game! Experiment with different board sizes and computer strategies, challenge yourself, or let computers battle it out. The game is simple to learn yet deep enough to reward planning and foresight. Have fun strategizing!
