@@ -13,14 +13,14 @@
 
 ## 1. Overview
 
-The **Row-Column Game (RC-Game)** is a modular, console-based Python project developed as a demonstration of structured design, clean code, and algorithmic strategy. It serves as both an educational tool and a framework for exploring decision-making systems. The game involves two players—either human or AI—competing to claim the highest total score by alternately selecting numbered cells from a shared grid. After each move, the next player is constrained to select only from the same row or column as the previous move.
+The **Row-Column Game (RC-Game)** is a modular, console-based Python project developed as a demonstration of structured design, clean code, and algorithmic strategy. It serves as both an educational tool and a framework for exploring decision-making systems. The game involves two players—either human or computer to claim the highest total score by alternately selecting numbered cells from a shared grid. After each move, the next player is constrained to select only from the same row or column as the previous move.
 
 The project emphasizes modular construction and loose coupling between its components. Its design draws inspiration from classical turn-based strategy games, but it operates entirely through the command line for maximum portability and clarity. Each module is written to be self-explanatory, following best practices in readability and separation of concerns.
 
 **Key Characteristics**
 - Pure Python 3.7+ implementation (no third-party dependencies).  
 - Multiple play modes: Human vs Human, Human vs Computer, and Computer vs Computer.  
-- Pluggable AI strategies that can evolve independently.  
+- Pluggable strategies that can evolve independently.  
 - Cross-platform compatibility across Windows, macOS, and Linux.  
 - Persistent configuration and game history tracking.  
 
@@ -63,7 +63,7 @@ The RC-Game is composed of several interconnected but independent modules. Each 
 └──────────────────────────────────────────┘
 ```
 
-The modular nature ensures that a change in, for instance, the AI logic does not affect how the board is rendered or how user input is parsed. This independence of layers leads to high maintainability and makes it easy to integrate new strategies or tweak the UI behavior.
+The modular nature ensures that a change in, for instance, the computer logic does not affect how the board is rendered or how user input is parsed. This independence of layers leads to high maintainability and makes it easy to integrate new strategies or tweak the UI behavior.
 
 ---
 
@@ -121,7 +121,7 @@ Implements the logical core of the RC-Game. It defines how the board evolves, ho
 
 **Behavioral Overview**
 1. Initializes the `BoardManager` based on the configuration parameters.  
-2. Assigns player controllers based on the selected mode (human or AI).  
+2. Assigns player controllers based on the selected mode (human or computer).  
 3. Runs a loop until no legal moves remain.  
 4. Executes validation for all moves before committing them.  
 5. Records and displays round-by-round progress.  
@@ -154,7 +154,7 @@ Manages all data and logic associated with the game grid. This module is effecti
 - **Rule Enforcement:** Restricts next moves to the same row or column.  
 - **Rendering:** Generates an ASCII-art visualization of the board’s current state.  
 
-The `BoardManager` also contains helper methods such as `max_remaining_value()`, which allows AI strategies to make informed decisions by examining the board’s remaining high-value cells. This tight integration of data and logic allows strategies to focus purely on reasoning, leaving structural consistency to the manager.
+The `BoardManager` also contains helper methods such as `max_remaining_value()`, which allows computer strategies to make informed decisions by examining the board’s remaining high-value cells. This tight integration of data and logic allows strategies to focus purely on reasoning, leaving structural consistency to the manager.
 
 **Display Behavior**  
 The grid printout includes headers, coordinates, and a boxed layout with clear delineation of rows and columns. The most recent move is marked with an `X`, emphasizing the game’s evolving structure visually.
@@ -164,7 +164,7 @@ The grid printout includes headers, coordinates, and a boxed layout with clear d
 ### 4.4 strategies.py — Artificial Intelligence System
 
 **Purpose:**  
-Provides a registry of AI behaviors that can compete autonomously or against humans. Each strategy is a self-contained function that receives a `BoardManager` instance and the last move position, then returns an optimal next move.
+Provides a registry of computer strategies or behaviors that can compete autonomously or against humans. Each strategy is a self-contained function that receives a `BoardManager` instance and the last move position, then returns an optimal next move.
 
 **Built-in Strategies**
 | Name | Description |
@@ -259,7 +259,7 @@ Every operation, from move selection to score updates, is echoed to the console.
 By allowing an optional seed parameter, the game ensures repeatable outcomes. This is invaluable for strategy testing or controlled experiments.
 
 **5. Extensibility Through Composition**  
-New behaviors can be introduced without altering existing code. AI strategies, for example, plug into the system through a registry mechanism.
+New behaviors can be introduced without altering existing code. computer strategies, for example, plug into the system through a registry mechanism.
 
 In essence, RC-Game is a model of clarity over complexity. It demonstrates how thoughtful architecture can make even a small console game feel polished and technically robust.
 
@@ -267,6 +267,6 @@ In essence, RC-Game is a model of clarity over complexity. It demonstrates how t
 
 ## 7. Conclusion
 
-The **Row-Column Game** exemplifies clean modular architecture in Python. Despite its minimal footprint, it integrates essential software engineering concepts—configuration management, state control, reproducibility, and decoupled design. Its architecture makes it an excellent base for experimenting with new AI strategies, visual enhancements, or game mechanics.
+The **Row-Column Game** exemplifies clean modular architecture in Python. Despite its minimal footprint, it integrates essential software engineering concepts—configuration management, state control, reproducibility, and decoupled design. 
 
 Beyond entertainment, the project is a teaching tool. It highlights how even a simple game can be an exercise in thoughtful system design, offering developers a chance to practice maintainability, abstraction, and algorithmic reasoning in a tangible and rewarding format.
