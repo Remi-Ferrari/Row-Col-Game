@@ -233,6 +233,6 @@ You may use, modify, and distribute it freely for educational or personal use.
 ---
 
 ## Contacts
-**Author(s):** Rémi FERRARI, 
+**Author(s):** Rémi FERRARI, Sandro Weeks, Fabrizio Gorelli, Diego Lafontaine, Gent Jusufi, Sal Vassallo
 
 ---
