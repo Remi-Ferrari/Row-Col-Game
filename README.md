@@ -14,9 +14,9 @@ The project serves as both a playable game and a demonstration of **clean modula
 - Pure **Python 3.7+** implementation (no third-party dependencies)
 - Interactive command-line interface
 - Multiple play modes: Human vs Human, Human vs Computer, Computer vs Computer
-- Pluggable AI strategies (`Greedy`, `MaximizeFutureMin`, `MinimizeOpponentOptions`, `PreserveHighValues`)
+- 4x Pluggable computer strategies (`Greedy`, `MaximizeFutureMin`, `MinimizeOpponentOptions`, `PreserveHighValues`)
 - Persistent configuration via `config.txt`
-- Automatic match logging in `history.csv`
+- Automatic match logging `history.csv`
 - Modular design allowing easy extension and testing
 
 ---
